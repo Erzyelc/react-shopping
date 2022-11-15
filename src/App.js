@@ -1,8 +1,9 @@
 import './App.css';
 import Product from './components/Product/Product';
+import Homepage from './components/Homepage/Homepage';
 
 function App() {
-
+  /*
   //create product object
   const product1 = {
     "id": 1,
@@ -29,22 +30,11 @@ function App() {
       "count": 259
     }
   };
-
+*/
 
   return (
     <div className="App">
-      <Product 
-        title = {product1.title} 
-        price = {product1.price}
-        category = {product1.category}
-        image = {product1.image}
-      />
-        <Product 
-        title = {product2.title} 
-        price = {product2.price}
-        category = {product2.category}
-        image = {product2.image}
-      />
+      <Homepage />
     </div>
   );
 }
