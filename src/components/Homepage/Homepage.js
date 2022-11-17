@@ -1,12 +1,48 @@
+import axios from 'axios';
 import React from 'react';
 import Product from '../Product/Product';
+//import axios from 'axios';
 import "./Homepage.css";
 
 function Homepage() {
 
     //create state for product info
     const [products, setProducts] = React.useState([
-        {
+        
+    ]);
+
+    //create function to get products
+  const fetchProducts = () => {
+      //get data from Api
+      //store in Products(state)
+    axios.get("https://fakestoreapi.com/products")
+      .then(response => {
+        //console.log(response.data)
+        //assign this data to Products(state)
+        setProducts(response.data);
+      });
+     console.log("Fetch!"); 
+  }
+
+  return (
+    <div>
+        <button onClick = {fetchProducts}>Fetch Products</button>
+        <div className="prod-container">
+        {products.map(item => {
+            return <Product
+            key = {item.id} 
+            title = {item.title} 
+            price = {item.price}
+            category = {item.category}
+            image = {item.image}
+            />
+        })}
+        </div>
+    </div>
+  )
+}
+
+/*{
             "id": 1,
             "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
             "price": 109.95,
@@ -30,27 +66,6 @@ function Homepage() {
               "count": 259
             }
           }
-    ]);
-
-    //create function to get products
-    const fetchProducts = () => {
-        console.log("connected!");
-    }
-
-  return (
-    <div>
-        <button onClick = {fetchProducts}>Fetch Products</button>
-        {products.map(item => {
-            return <Product
-            key = {item.id} 
-            title = {item.title} 
-            price = {item.price}
-            category = {item.category}
-            image = {item.image}
-            />
-        })}
-    </div>
-  )
-}
+          */
 
 export default Homepage
