@@ -1,6 +1,10 @@
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import './App.css';
-import Product from './components/Product/Product';
+//import Product from './components/Product/Product';
 import Homepage from './components/Homepage/Homepage';
+import ProductDetail from './components/ProductDetail/ProductDetail';
+import Cart from './components/Cart/Cart';
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   /*
@@ -34,7 +38,14 @@ function App() {
 
   return (
     <div className="App">
-      <Homepage />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path = "/detail" element = {<ProductDetail /> } />
+          <Route exact path = "/" element = {<Homepage /> } />
+          <Route exact path = "/cart" element = {<Cart /> } />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

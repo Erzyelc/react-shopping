@@ -7,11 +7,17 @@ import "./Homepage.css";
 function Homepage() {
 
     //create state for product info
-    const [products, setProducts] = React.useState([
-        
-    ]);
+    const [products, setProducts] = React.useState([]);
+        //get data when componenet loads
+    React.useEffect(
+      () => {
+        console.log("component loaded")
+        //fetch the products
+        fetchProducts();
+      }, []
+    )
 
-    //create function to get products
+  //create function to get products
   const fetchProducts = () => {
       //get data from Api
       //store in Products(state)
@@ -26,7 +32,9 @@ function Homepage() {
 
   return (
     <div>
+        {/*
         <button onClick = {fetchProducts}>Fetch Products</button>
+        */}
         <div className="prod-container">
         {products.map(item => {
             return <Product
