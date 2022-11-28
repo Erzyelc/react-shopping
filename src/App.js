@@ -7,6 +7,25 @@ import Cart from './components/Cart/Cart';
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path = "/detail" element = {<ProductDetail /> } />
+          <Route exact path = "/" element = {<Homepage /> } />
+          <Route exact path = "/cart" element = {<Cart /> } /> 
+        </Routes>
+        {/*Footer goes here*/}
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+
+
+
   /*
   //create product object
   const product1 = {
@@ -35,19 +54,3 @@ function App() {
     }
   };
 */
-
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route exact path = "/detail" element = {<ProductDetail /> } />
-          <Route exact path = "/" element = {<Homepage /> } />
-          <Route exact path = "/cart" element = {<Cart /> } />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
-
-export default App;
