@@ -38,7 +38,8 @@ function Homepage() {
         <div className="prod-container">
         {products.map(item => {
             return <Product
-            key = {item.id} 
+            key= {item.id}
+            id = {item.id} 
             title = {item.title} 
             price = {item.price}
             category = {item.category}
