@@ -5,15 +5,26 @@ import Homepage from './components/Homepage/Homepage';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Cart from './components/Cart/Cart';
 import Navbar from "./components/Navbar/Navbar";
+import React from "react";
 
 function App() {
+  
+  //create state to hold all products orderd
+  const [cartProducts, setCartProducts] = React.useState();
+
+  //create a function used by ProductDetail component to add product to cart
+  function addProductToCart(productToAdd){
+    console.log(productToAdd);
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
         <Routes>
           <Route exact path = "/products" element = {<Homepage /> } />
-          <Route exact path = "/products/:id" element = {<ProductDetail /> } />
+          <Route exact path = "/products/:id" element = {<ProductDetail 
+                                    addProductToCart={addProductToCart}/> } />
           <Route exact path = "/cart" element = {<Cart /> } /> 
           <Route exact path = "*" element={<Navigate to="/products" replace />} />
         </Routes>
