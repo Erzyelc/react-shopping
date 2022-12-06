@@ -10,11 +10,24 @@ import React from "react";
 function App() {
   
   //create state to hold all products orderd
-  const [cartProducts, setCartProducts] = React.useState();
+  const [cartProducts, setCartProducts] = React.useState([]);
 
   //create a function used by ProductDetail component to add product to cart
   function addProductToCart(productToAdd){
     console.log(productToAdd);
+    //replace state 
+    setCartProducts([...cartProducts, productToAdd])
+  }
+
+  function removeFromCart(productToRemove){
+    console.log(productToRemove);
+    //replace state
+    //use filter to create new array without this product
+    const newCartProducts = cartProducts.filter(
+      item => item.id !== productToRemove.id
+    )
+      //make this the new cart products
+      setCartProducts(newCartProducts);
   }
 
   return (
@@ -25,7 +38,8 @@ function App() {
           <Route exact path = "/products" element = {<Homepage /> } />
           <Route exact path = "/products/:id" element = {<ProductDetail 
                                     addProductToCart={addProductToCart}/> } />
-          <Route exact path = "/cart" element = {<Cart /> } /> 
+          <Route exact path = "/cart" element = {<Cart cartProducts={cartProducts}
+                                    removeFromCart={removeFromCart} />} /> 
           <Route exact path = "*" element={<Navigate to="/products" replace />} />
         </Routes>
         {/*Footer goes here*/}
