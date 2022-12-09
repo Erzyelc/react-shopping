@@ -15,8 +15,44 @@ function App() {
   //create a function used by ProductDetail component to add product to cart
   function addProductToCart(productToAdd){
     console.log(productToAdd);
+    //if product to add is not already in cart, we need to add it with a quantity of 1;
+    //otherwise we need to incrememnt quantity of item already in cart
+
+    //look for productToAdd in cartProducts
+    const match = cartProducts.find( prod => prod.id === productToAdd.id);
+    console.log("match is " , match);
+    //if not there matchh is undefined which is "falsy"
+    if(!match){
+      console.log("first buy");
+      let newCart = [...cartProducts, {...productToAdd, quantity: 1}]
+      console.log(newCart);
+      //make this new state
+      setCartProducts(newCart);
+    }else{
+      console.log("increase qty");
+      updateCartQuantity(match, true);
+    }
     //replace state 
-    setCartProducts([...cartProducts, productToAdd])
+    //setCartProducts([...cartProducts, productToAdd])
+  }
+
+  function updateCartQuantity(productToChange, increase){
+    //if increase is true, add 1 to qty
+    //if false, subtract 1
+    let newQty = productToChange.quantity + 1;
+    if(!increase){
+      newQty = productToChange.quantity - 1;
+    }
+    console.log("newQty is " + newQty);
+    //have to map cart products to change qty of the one that matchces productToChange
+    //leave the others alone
+    const newCart = cartProducts.map(prod => productToChange.id === 
+      prod.id ? 
+        {...productToChange, quantity: newQty} : prod  
+      )
+      console.log("newCart ", newCart);
+      //replace the state with this
+      setCartProducts(newCart);
   }
 
   function removeFromCart(productToRemove){
@@ -39,7 +75,9 @@ function App() {
           <Route exact path = "/products/:id" element = {<ProductDetail 
                                     addProductToCart={addProductToCart}/> } />
           <Route exact path = "/cart" element = {<Cart cartProducts={cartProducts}
-                                    removeFromCart={removeFromCart} />} /> 
+                                    removeFromCart={removeFromCart}
+                                    updateCartQuantity={updateCartQuantity}
+                                    />} /> 
           <Route exact path = "*" element={<Navigate to="/products" replace />} />
         </Routes>
         {/*Footer goes here*/}
@@ -49,34 +87,3 @@ function App() {
 }
 
 export default App;
-
-
-
-  /*
-  //create product object
-  const product1 = {
-    "id": 1,
-    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    "price": 109.95,
-    "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    "category": "men's clothing",
-    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    "rating": {
-      "rate": 3.9,
-      "count": 120
-    }
-  };
-
-  const product2 = {
-    "id": 2,
-    "title": "Mens Casual Premium Slim Fit T-Shirts",
-    "price": 22.3,
-    "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fir for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-    "category": "men's clothing",
-    "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-    "rating": {
-      "rate": 4.1,
-      "count": 259
-    }
-  };
-*/

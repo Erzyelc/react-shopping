@@ -1,9 +1,18 @@
 .cart-item{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+    
 }
 
 .cart-item img{
     width: 100px;
+    height: 100px;
+}
+
+.cart-btn{
+    font-size: 2em;
+    background-color: lightgoldenrodyellow;
+    cursor: pointer;
 }
