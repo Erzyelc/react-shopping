@@ -8,8 +8,9 @@
 
 
 .product-image{
-    
-    width: 200px;
+    height: 300px;
+    width: 300px;
+    border-radius: 15px 0 0 15px;
 }
 
 .product-card {
@@ -17,6 +18,11 @@
     align-items: center;
     justify-content: space-between;
     margin: 30px;
+    color: #8AB0AB;
+    text-decoration: none;
+    background-color: #f5ebe0;
+    border-radius: 15px;
+    height: 300px;
 }
 
 .product-card h3{
